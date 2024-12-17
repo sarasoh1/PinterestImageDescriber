@@ -10,6 +10,6 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true  
   },
-  "include": ["src/*", "src/*/*"],
+  "include": ["src/*", "src/*/*", "src/utils/config/db.ts", "src/utils/config/s3.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

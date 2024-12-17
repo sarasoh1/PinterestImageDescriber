@@ -1,7 +1,8 @@
 import { Builder, By, ThenableWebDriver } from 'selenium-webdriver';
-import Chrome from 'selenium-webdriver/chrome';
 import chalk from 'chalk';
 import PinterestError from './errorHandler';
+
+const chrome = require('selenium-webdriver/chrome');
 
 /**
  * @class Pinterest
@@ -32,7 +33,7 @@ export default class Pinterest {
         this.driver = new Builder()
             .forBrowser('chrome')
             .setChromeOptions(
-                new Chrome.Options()
+                new chrome.Options()
                     .windowSize({ width: 1920, height: 1080 })
                     .addArguments('--headless')
                     .addArguments('disable-gpu', 'log-level=3')
@@ -162,16 +163,26 @@ export default class Pinterest {
      */
     async returnImages(): Promise<string[] | any[]> {
         const request: string = await this.driver.getPageSource();
-        const pins: RegExpMatchArray | null = request.match(/<img.*?src=["'](.*?)["']/g);
-        if (pins === null) return [];
+        const pins: RegExpMatchArray | null = request.match(/<a.*?href="(\/pins[^"]*)"/g);
+        const pinImages: RegExpMatchArray | null = request.match(/<img.*?src=["'](.*?)["']/g);
+        if (pinImages === null) return [];
 
-        for (const pin of pins) {
+        if (pins !== null) {
+            for (const pin of pins) {
+                console.log(pin)
+            }
+        }
+
+        for (const pin of pinImages) {
             var source: RegExpMatchArray | null | string = pin.match(/src=["'](.*?)["']/);
             if (source == null) continue;
             source = source[1] as string;
 
             if (!source.includes("75x75_RS") && !source.includes("/30x30_RS/") && !this.pinList.includes(source)) {
-                this.pinList.push(this.replacer(source));
+                const replaced = this.replacer(source);
+                if (replaced.includes("originals") && this.pinList.length < 20) {
+                    this.pinList.push(replaced);
+                }
             }
         }
 
