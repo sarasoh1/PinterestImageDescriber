@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Post" ADD COLUMN     "includeInShop" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "price" DOUBLE PRECISION;
