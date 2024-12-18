@@ -10,7 +10,7 @@ dotenv.config();
 const pinterestOptions: PinterestLoginOptions = {
     email: process.env.email as string || "",
     password: process.env.password as string || "" ,
-    scrollCount: parseInt(process.env.scrollCount as string) || 1
+    scrollCount: parseInt(process.env.SCROLLCOUNT as string) || 1
 };
 
 

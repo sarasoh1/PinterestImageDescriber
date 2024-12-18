@@ -20,6 +20,9 @@
     "pinterest",
     "pin",
     "scraper",
+    "openai",
+    "image-to-text",
+    "qdrant-search",
     "selenium",
     "typescript",
     "nodejs",
@@ -30,10 +33,10 @@
     "selenium-scraper"
   ],
   "author": {
-    "name": "Bes-js",
-    "url": "https://github.com/Bes-js"
+    "name": "sarasoh1",
+    "url": "https://github.com/sarasoh1https://github.com/sarasoh1"
   },
-  "license": "GPL-3.0",
+  "license": "MIT",
   "dependencies": {
     "@ai-sdk/openai": "^1.0.8",
     "@aws-sdk/client-s3": "^3.705.0",
